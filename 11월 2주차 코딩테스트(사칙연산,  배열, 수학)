@@ -1,0 +1,96 @@
+// 1. 정수 num1, num2가 매개변수로 주어질 때, num1를 num2로 나눈 나머지를 return 하도록 solution 함수를 완성해주세요.
+
+class Solution { // 나머지 구하기
+    public int solution(int num1, int num2) {
+        int answer = -1;
+        if((0 < num1 && num1 <= 100) && (0 < num2 && num2 <= 100))
+        {
+            answer = num1%num2;
+        }
+        else{
+            answer = -1;
+        }
+        return answer;
+    }
+}
+
+// 2. 중앙값은 어떤 주어진 값들을 크기의 순서대로 정렬했을 때 가장 중앙에 위치하는 값을 의미합니다. 예를 들어 1, 2, 7, 10, 11의 중앙값은 7입니다.
+정수 배열 array가 매개변수로 주어질 때, 중앙값을 return 하도록 solution 함수를 완성해보세요.
+
+import java.util.*; // arrays.sort()를 사용하기 위해 import 추가
+
+class Solution { // 중앙값 구하기
+    public int solution(int[] array) {
+        int answer = 0;
+                
+        Arrays.sort(array);
+
+        answer = array[array.length / 2];
+        
+        return answer;
+    }
+}
+
+// 3. 최빈값은 주어진 값 중에서 가장 자주 나오는 값을 의미합니다. 
+정수 배열 array가 매개변수로 주어질 때, 최빈값을 return 하도록 solution 함수를 완성해보세요. 최빈값이 여러 개면 -1을 return 합니다.
+
+class Solution { // 최빈값 구하기
+    public int solution(int[] array) {
+        int answer = 0;        
+        
+        int index_d = 1000; // index_d값 초기 설정(1000)
+        
+        int[] ary = new int[2001]; // 크기가 2001인 배열 생성
+        
+        for(int i = 0; i < array.length; i++){ // i시작 0부터 array 길이 미만일때까지 하나씩 증가
+            ary[array[i] + index_d]++; // arr[]은 최소 array[0] + 1000 부터 하나씩 증가
+            // arr[array[0]+index_d] -> arr[1001]
+        }
+        
+        int max = 0; // 최대값 초기 설정
+        int max_index = 0; // 최대값 인덱스 초기 설정
+        
+        for(int i = 0; i < ary.length; i++){ // i시작 0부터 ary 미만일때까지 하나씩 증가
+            if(ary[i] > max){ // ary[i]가 max 보다 크면
+                max = ary[i]; // max는 ary배열 값
+                // max = any[0] -> max = 1
+                max_index = i-index_d; // max_index는 i-index_d(1000)
+                // max_index = 0-1000 -> max_index = -1000
+            }
+        }
+        int count = 0; // count값 초기 설정
+        for(int i = 0; i < ary.length; i++){
+            if(ary[i]==max) // ary[0] == 1 -> 1 == 1
+                count++; // ary[i]가 max와 같으면 count 하나씩 증가
+        }
+        if(count > 1) 
+            return -1; // count가 1보다 크면 return 값 -1
+        answer = max_index; // answer값은 max_index
+        
+        return answer; // return값은 answer
+    }
+}
+
+// 4. 정수 n이 매개변수로 주어질 때, n 이하의 홀수가 오름차순으로 담긴 배열을 return하도록 solution 함수를 완성해주세요.
+
+class Solution { // 홀수를 오름차순으로 정렬
+    public int[] solution(int n) {
+        int[] answer = {};
+        if(1 <= n && n <= 100){
+            if (n % 2 == 1) { // n이 홀수
+                answer = new int[n/2 + 1];
+            }
+            else { // n이 짝수
+                answer = new int[n/2];
+            }
+            int cnt = 0;
+            for (int i = 1; i <= n; i ++) {
+                if (i % 2 == 1) { 
+                    answer[cnt] = i; 
+                    cnt++; 
+                }
+            }
+        }
+        return answer;
+    }
+}
